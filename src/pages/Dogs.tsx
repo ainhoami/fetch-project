@@ -6,15 +6,15 @@ const Dogs = () => {
 		id: 'id',
 		img: 'img',
 		name: 'name',
-		age: 'age',
+		age: 7,
 		zip_code: 'zipc',
 		breed: 'bread',
 	};
 	return (
 		<>
 			<PageRibbon />
-			<div>filtering stuff</div>
-			<div className='flex flex-wrap pr-2 pt-2 md:pr-5 md:pt-5'>
+			<div className='text-black dark:text-white'>filtering stuff</div>
+			<div className='flex flex-wrap pr-2 pt-2 md:pr-5 md:pt-5 bg-blue-200 dark:bg-gray-900'>
 				{[
 					fakeObj,
 					fakeObj,

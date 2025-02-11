@@ -13,7 +13,7 @@ import testImage from '../../assets/login_dog.jpg';
 
 const DogCard: React.FC<DogCardProps> = ({ card }) => {
 	return (
-		<div className='bg-white flex-row border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-700'>
+		<div className='bg-blue-50 flex-row border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-700'>
 			<div className=''>
 				<img
 					className='rounded-t-lg rounded-t-lg w-full object-cover h-70'
