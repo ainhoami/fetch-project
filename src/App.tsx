@@ -8,11 +8,11 @@ import Login from './pages/Login';
 const App: React.FC = () => {
 	return (
 		<Router>
-			{/* <Navbar /> */}
 			<Routes>
 				<Route path='/' element={<Landing />} />
-				<Route path='/dogs' element={<Dogs />} />
+				<Route path='/dogs/:user' element={<Dogs />} />
 				<Route path='/login' element={<Login />} />
+				<Route path='*' element={<Login />} />
 			</Routes>
 		</Router>
 	);

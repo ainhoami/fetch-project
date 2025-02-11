@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom';
 const baseUrl = import.meta.env.VITE_API_URL;
 
 const SignInForm = () => {
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
+	const [name, setName] = useState('default');
+	const [email, setEmail] = useState('defualt@email.com');
 	const navigate = useNavigate();
 
 	const handleLoginSubmit = () => {
@@ -14,8 +14,8 @@ const SignInForm = () => {
 			.post(
 				baseUrl + '/auth/login',
 				{
-					name: 'sdfgsdfg',
-					email: 'sdfe@c.com',
+					name,
+					email,
 				},
 				{
 					headers: {
@@ -26,7 +26,7 @@ const SignInForm = () => {
 			)
 			.then((res) => {
 				if (res.status === 200) {
-					navigate('/dogs');
+					navigate(`/dogs/${name}`);
 				}
 				console.log(res, 'res');
 			})
