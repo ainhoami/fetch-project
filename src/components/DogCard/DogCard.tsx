@@ -1,17 +1,22 @@
-interface Dog {
-	id: string;
-	img: string;
-	name: string;
-	age: number;
-	zip_code: string;
-	breed: string;
-}
+import { useState } from 'react';
+import testImage from '../../assets/login_dog.jpg';
+import Heart from 'react-heart';
+import { Dog } from '../../pages/Dogs';
 interface DogCardProps {
 	card: Dog;
+	setFavorite: (val: string, fav: boolean) => void;
 }
-import testImage from '../../assets/login_dog.jpg';
+const DogCard: React.FC<DogCardProps> = ({
+	card,
+	setFavorite,
+}: DogCardProps) => {
+	const [isHeartActive, setIsHeartActive] = useState<boolean>(false);
 
-const DogCard: React.FC<DogCardProps> = ({ card }) => {
+	const handleFavorite = () => {
+		setFavorite(card.id, !isHeartActive);
+		setIsHeartActive(!isHeartActive);
+	};
+
 	return (
 		<div className='bg-blue-50 flex-row border border-gray-200 rounded-lg shadow-sm dark:bg-gray-700 dark:border-gray-700'>
 			<div className=''>
@@ -33,27 +38,15 @@ const DogCard: React.FC<DogCardProps> = ({ card }) => {
 				<p className='mb-4 font-normal text-gray-700 dark:text-gray-400'>
 					Zip Code
 				</p>
-				<a
-					href='#'
-					className='inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
-				>
-					favorite
-					<svg
-						className='rtl:rotate-180 w-3.5 h-3.5 ms-2'
-						aria-hidden='true'
-						xmlns='http://www.w3.org/2000/svg'
-						fill='none'
-						viewBox='0 0 14 10'
-					>
-						<path
-							stroke='currentColor'
-							stroke-linecap='round'
-							stroke-linejoin='round'
-							stroke-width='2'
-							d='M1 5h12m0 0L9 1m4 4L9 9'
-						/>
-					</svg>
-				</a>
+				<span className=''>
+					<Heart
+						style={{ width: '2rem' }}
+						inactiveColor='white'
+						isActive={isHeartActive}
+						activeColor='#D22B2B'
+						onClick={handleFavorite}
+					/>
+				</span>
 			</div>
 		</div>
 	);
