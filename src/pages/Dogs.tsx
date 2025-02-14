@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import DogCard from '../components/DogCard/DogCard';
 import PageRibbon from '../components/PageRibbon/PageRibbon';
 import axios from 'axios';
+import SortFilterSection from '../components/SortFilterSection/SortFilterSection';
 
 export interface Dog {
 	id: string;
@@ -14,7 +15,7 @@ export interface Dog {
 
 const Dogs = () => {
 	const [favoriteList, setFavoriteList] = useState<string[]>([]);
-
+	const [breeds, setBreeds] = useState<string[]>([]);
 	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 	const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -48,13 +49,18 @@ const Dogs = () => {
 				},
 				withCredentials: true,
 			})
-			.then((res) => console.log(res))
+			.then((res) => {
+				setBreeds(res.data);
+				console.log(res);
+			})
+
 			.catch((e) => console.log(e));
 	}, []);
+
 	return (
 		<>
 			<PageRibbon />
-			<div className='text-black dark:text-white'>filtering stuff</div>
+			<SortFilterSection breeds={breeds} />
 			<div className='flex flex-wrap pr-2 pt-2 md:pr-5 md:pt-5 bg-blue-200 dark:bg-gray-900'>
 				{[
 					fakeObj,
