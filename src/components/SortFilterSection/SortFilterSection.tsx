@@ -1,14 +1,28 @@
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
 interface ISortFilterSectionProps {
 	breeds?: string[];
+	setBreed?: (breed: string) => void;
 }
 
-const SortFilterSection = ({ breeds }: ISortFilterSectionProps) => {
+const SortFilterSection = ({ breeds, setBreed }: ISortFilterSectionProps) => {
 	const [dropdDownOpen, setDropdownOpen] = useState<boolean>(false);
+
 	const handleDropdown = () => {
 		setDropdownOpen(!dropdDownOpen);
 	};
+
+	const handleDropdownOption = (breed: string) => {
+		setDropdownOpen(!dropdDownOpen);
+		if (setBreed) {
+			setBreed(breed);
+		}
+	};
+	useEffect(() => {
+		if (breeds && setBreed) {
+			setBreed(breeds[0]);
+		}
+	}, [breeds]);
+
 	return (
 		<div
 			className='flex flex-wrap justify-end
@@ -25,11 +39,11 @@ const SortFilterSection = ({ breeds }: ISortFilterSectionProps) => {
 					<button
 						id='dropdownDefaultButton'
 						data-dropdown-toggle='dropdown'
-						className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+						className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-7 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
 						type='button'
 						onClick={handleDropdown}
 					>
-						Dropdown button{' '}
+						Dog Breeds
 						<svg
 							className='w-2.5 h-2.5 ms-3'
 							aria-hidden='true'
@@ -57,11 +71,12 @@ const SortFilterSection = ({ breeds }: ISortFilterSectionProps) => {
 							className='py-2 text-sm text-gray-700 dark:text-gray-200'
 							aria-labelledby='dropdownDefaultButton'
 						>
-							{breeds?.map((breed) => {
+							{breeds?.map((breed, i) => {
 								return (
-									<li>
+									<li key={i}>
 										<a
 											// href='#'
+											onClick={() => handleDropdownOption(breed)}
 											className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
 										>
 											{breed}

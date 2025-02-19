@@ -22,21 +22,21 @@ const DogCard: React.FC<DogCardProps> = ({
 			<div className=''>
 				<img
 					className='rounded-t-lg rounded-t-lg w-full object-cover h-70'
-					src={testImage}
-					alt=''
+					src={card.img}
+					alt={`Dog name: ${card.breed}. Breed: ${card.breed}`}
 				/>
 			</div>
 
 			<div className='p-5 flex flex-col items-center justify-center'>
 				<h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
-					Name: Age
+					{card.name}: {card.age}
 				</h5>
 
-				<p className='mb-1 font-normal text-gray-700 dark:text-gray-400'>
-					Breed: breed
+				<p className='mb-1 font-normal text-gray-700 dark:text-gray-400 text-center'>
+					Breed: {card.breed}
 				</p>
 				<p className='mb-4 font-normal text-gray-700 dark:text-gray-400'>
-					Zip Code
+					{card.zip_code}
 				</p>
 				<span className=''>
 					<Heart
