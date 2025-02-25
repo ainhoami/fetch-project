@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import testImage from '../../assets/login_dog.jpg';
 import Heart from 'react-heart';
 import { Dog } from '../../pages/Dogs';
 interface DogCardProps {

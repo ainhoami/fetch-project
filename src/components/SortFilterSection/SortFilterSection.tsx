@@ -1,27 +1,47 @@
 import { useEffect, useState } from 'react';
+import { IFilterOptions } from '../../pages/Dogs';
 interface ISortFilterSectionProps {
 	breeds?: string[];
 	setBreed?: (breed: string) => void;
+	filterOptions?: IFilterOptions;
+	setFilterOptions?: (option: IFilterOptions) => void;
 }
 
-const SortFilterSection = ({ breeds, setBreed }: ISortFilterSectionProps) => {
+const SortFilterSection = ({
+	breeds,
+	setBreed,
+	filterOptions,
+	setFilterOptions,
+}: ISortFilterSectionProps) => {
 	const [dropdDownOpen, setDropdownOpen] = useState<boolean>(false);
 
 	const handleDropdown = () => {
 		setDropdownOpen(!dropdDownOpen);
 	};
 
-	const handleDropdownOption = (breed: string) => {
+	const handleDropdownOption = (breedChosen: string) => {
 		setDropdownOpen(!dropdDownOpen);
-		if (setBreed) {
-			setBreed(breed);
+		// if (setBreed) {
+		// 	setBreed(breedChosen);
+		// }
+		if (setFilterOptions) {
+			setFilterOptions((prev: IFilterOptions) => {
+				return {
+					...prev,
+					breeds: breedChosen,
+				};
+			});
 		}
 	};
+
 	useEffect(() => {
-		if (breeds && setBreed) {
-			setBreed(breeds[0]);
-		}
-	}, [breeds]);
+		// setFilterOptions((prev: IFilterOptions) => {
+		// 	return {
+		// 		...prev,
+		// 		breeds: breeds[0],
+		// 	};
+		// });
+	}, []);
 
 	return (
 		<div
@@ -36,6 +56,7 @@ const SortFilterSection = ({ breeds, setBreed }: ISortFilterSectionProps) => {
  pl-5 pr-4 md:pr-0 pb-5 basis-1/1 md:basis-1/2'
 			>
 				<div>
+					<p className='text-black'>Dogs Breed Filter</p>
 					<button
 						id='dropdownDefaultButton'
 						data-dropdown-toggle='dropdown'
@@ -43,7 +64,7 @@ const SortFilterSection = ({ breeds, setBreed }: ISortFilterSectionProps) => {
 						type='button'
 						onClick={handleDropdown}
 					>
-						Dog Breeds
+						{filterOptions?.breeds || 'Dog Breeds'}
 						<svg
 							className='w-2.5 h-2.5 ms-3'
 							aria-hidden='true'
@@ -60,7 +81,6 @@ const SortFilterSection = ({ breeds, setBreed }: ISortFilterSectionProps) => {
 							/>
 						</svg>
 					</button>
-
 					<div
 						id='dropdown'
 						className={`z-10 ${
@@ -76,7 +96,9 @@ const SortFilterSection = ({ breeds, setBreed }: ISortFilterSectionProps) => {
 									<li key={i}>
 										<a
 											// href='#'
-											onClick={() => handleDropdownOption(breed)}
+											onClick={() =>
+												handleDropdownOption(breed)
+											}
 											className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
 										>
 											{breed}

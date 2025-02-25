@@ -32,13 +32,17 @@ const SignInForm = () => {
 			})
 			.catch((error) => {
 				console.error(error);
+				console.log(error, 'error auth');
 			});
 	};
 
 	return (
 		<div className='md:bg-blue-500 md:p-30 rounded-lg'>
 			<div>
-				<label htmlFor='name' className='block text-sm/6 font-medium text-thite'>
+				<label
+					htmlFor='name'
+					className='block text-sm/6 font-medium text-thite'
+				>
 					Name
 				</label>
 				<div className='mt-1'>
