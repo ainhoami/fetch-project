@@ -28,11 +28,9 @@ const SignInForm = () => {
 				if (res.status === 200) {
 					navigate(`/dogs/${name}`);
 				}
-				console.log(res, 'res');
 			})
 			.catch((error) => {
 				console.error(error);
-				console.log(error, 'error auth');
 			});
 	};
 

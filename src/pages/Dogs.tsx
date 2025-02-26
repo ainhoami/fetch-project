@@ -18,6 +18,7 @@ export interface IFilterOptions {
 	ageMin?: number;
 	ageMax?: number;
 	breeds?: string;
+	sort?: string;
 }
 const Dogs = () => {
 	const [favoriteList, setFavoriteList] = useState<string[]>([]);
@@ -25,7 +26,6 @@ const Dogs = () => {
 	const [filterOptions, setFilterOptions] = useState<IFilterOptions>({});
 	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 	const [dogsOnDisplay, setDogsOnDisplay] = useState<Dog[]>([]);
-	const [filteredBreed, setFilteredBreed] = useState<string>('');
 	const baseUrl = import.meta.env.VITE_API_URL;
 
 	const handleSetFavorite = (val: string, isFavorite: boolean) => {
@@ -58,7 +58,6 @@ const Dogs = () => {
 			});
 		}
 
-		console.log(Object.entries(filterOptions), 'objec.keys.values');
 		axios
 			.get(`${baseUrl}/dogs/search${params}`, {
 				headers: {
@@ -67,7 +66,6 @@ const Dogs = () => {
 				withCredentials: true,
 			})
 			.then((res) => {
-				console.log(res.data, 'filtro con breed');
 				axios
 					.post(baseUrl + '/dogs/', res.data.resultIds, {
 						headers: {
@@ -76,7 +74,6 @@ const Dogs = () => {
 						withCredentials: true,
 					})
 					.then((res) => {
-						console.log(res, 'search dogs');
 						setDogsOnDisplay(res.data);
 					})
 					.catch((e) => console.log(e));
@@ -89,7 +86,7 @@ const Dogs = () => {
 			<PageRibbon />
 			<SortFilterSection
 				breeds={breeds}
-				setBreed={setFilteredBreed}
+				// setBreed={setFilteredBreed}
 				filterOptions={filterOptions}
 				setFilterOptions={setFilterOptions}
 			/>
