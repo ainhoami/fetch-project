@@ -1,5 +1,3 @@
-import { useState } from 'react';
-// src/routes.tsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Dogs from './pages/Dogs';

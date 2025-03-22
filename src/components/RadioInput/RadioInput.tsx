@@ -1,10 +1,3 @@
-import { useState } from 'react';
-
-// interface IRadioInput {
-// 	name: string;
-// 	value: string;
-
-// }
 interface RadioInputProps {
 	options: Record<string, string>;
 	selectedVal: [val: string, (val: string) => void];

@@ -35,12 +35,12 @@ const DogCard: React.FC<DogCardProps> = ({
 					Breed: {card.breed}
 				</p>
 				<p className='mb-4 font-normal text-gray-700 dark:text-gray-400'>
-					{card.zip_code}
+					ZipCode: {card.zip_code}
 				</p>
 				<span className=''>
 					<Heart
 						style={{ width: '2rem' }}
-						inactiveColor='white'
+						inactiveColor='pink'
 						isActive={isHeartActive}
 						activeColor='#D22B2B'
 						onClick={handleFavorite}

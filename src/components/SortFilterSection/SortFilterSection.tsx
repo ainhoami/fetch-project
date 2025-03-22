@@ -4,7 +4,7 @@ import RadioInput from '../RadioInput/RadioInput';
 interface ISortFilterSectionProps {
 	breeds?: string[];
 	filterOptions?: IFilterOptions;
-	setFilterOptions: (option: IFilterOptions) => void;
+	setFilterOptions: (option: Record<string, any>) => void;
 }
 
 const SortFilterSection = ({
@@ -106,7 +106,6 @@ const SortFilterSection = ({
 									return (
 										<li key={i}>
 											<a
-												// href='#'
 												onClick={() =>
 													handleDropdownOption(breed)
 												}

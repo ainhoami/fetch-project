@@ -78,7 +78,11 @@ const Dogs = () => {
 					})
 					.catch((e) => console.log(e));
 			})
-			.catch((e) => console.log(e));
+			.catch((e) => {
+				if (e.response.status === 401) {
+					window.location.href = '/login';
+				}
+			});
 	}, [filterOptions]);
 
 	return (
