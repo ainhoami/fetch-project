@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DogCard from '../components/DogCard/DogCard';
 import PageRibbon from '../components/PageRibbon/PageRibbon';
 import axios from 'axios';
@@ -27,6 +28,7 @@ const Dogs = () => {
 	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 	const [dogsOnDisplay, setDogsOnDisplay] = useState<Dog[]>([]);
 	const baseUrl = import.meta.env.VITE_API_URL;
+	const navigate = useNavigate();
 
 	const handleSetFavorite = (val: string, isFavorite: boolean) => {
 		setFavoriteList((prev) =>
@@ -45,7 +47,12 @@ const Dogs = () => {
 			.then((res) => {
 				setBreeds(res.data);
 			})
-			.catch((e) => console.log(e));
+			.catch((e) => {
+				if (e.response.status === 401) {
+					navigate('/login', { replace: true });
+				}
+				console.error(e.response);
+			});
 	}, []);
 
 	useEffect(() => {
@@ -76,11 +83,11 @@ const Dogs = () => {
 					.then((res) => {
 						setDogsOnDisplay(res.data);
 					})
-					.catch((e) => console.log(e));
+					.catch((e) => console.error(e.response));
 			})
 			.catch((e) => {
 				if (e.response.status === 401) {
-					window.location.href = '/login';
+					navigate('/login', { replace: true });
 				}
 			});
 	}, [filterOptions]);
