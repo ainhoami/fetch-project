@@ -1,9 +1,9 @@
 import Heart from 'react-heart';
-import { Dog } from '../../pages/Dogs';
+import { IDog } from '../../pages/Dogs';
 interface DogCardProps {
-	card: Dog;
-	favoriteList: string[];
-	setFavoriteList: (val: string[]) => void;
+	card: IDog;
+	favoriteList?: string[];
+	setFavoriteList?: (val: string[]) => void;
 }
 const DogCard: React.FC<DogCardProps> = ({
 	card,
@@ -11,10 +11,12 @@ const DogCard: React.FC<DogCardProps> = ({
 	setFavoriteList,
 }: DogCardProps) => {
 	const handleFavorite = (val: string) => {
-		if (favoriteList.includes(val)) {
-			setFavoriteList(favoriteList.filter((dogId) => dogId !== val));
-		} else {
-			setFavoriteList([...favoriteList, val]);
+		if (setFavoriteList && favoriteList) {
+			if (favoriteList.includes(val)) {
+				setFavoriteList(favoriteList.filter((dogId) => dogId !== val));
+			} else {
+				setFavoriteList([...favoriteList, val]);
+			}
 		}
 	};
 
@@ -39,15 +41,17 @@ const DogCard: React.FC<DogCardProps> = ({
 				<p className='mb-4 font-normal text-gray-700 dark:text-gray-400'>
 					ZipCode: {card.zip_code}
 				</p>
-				<span className=''>
-					<Heart
-						style={{ width: '2rem' }}
-						inactiveColor='pink'
-						isActive={favoriteList.includes(card.id)}
-						activeColor='#D22B2B'
-						onClick={() => handleFavorite(card.id)}
-					/>
-				</span>
+				{favoriteList && (
+					<span className=''>
+						<Heart
+							style={{ width: '2rem' }}
+							inactiveColor='pink'
+							isActive={favoriteList.includes(card.id)}
+							activeColor='#D22B2B'
+							onClick={() => handleFavorite(card.id)}
+						/>
+					</span>
+				)}
 			</div>
 		</div>
 	);
