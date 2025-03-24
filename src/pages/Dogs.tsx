@@ -26,6 +26,7 @@ export interface IFilterOptions {
 }
 export interface ICurrentPage {
 	next: string;
+	prev: string;
 	total: number;
 }
 
@@ -36,6 +37,7 @@ const Dogs = () => {
 	const [dogsOnDisplay, setDogsOnDisplay] = useState<IDog[]>([]);
 	const [currentPage, setCurrentPage] = useState<ICurrentPage>({
 		next: '',
+		prev: '',
 		total: 0,
 	});
 	const [dogMatch, setDogMatch] = useState<IDog[]>([]);
@@ -112,7 +114,11 @@ const Dogs = () => {
 				withCredentials: true,
 			})
 			.then((res) => {
-				setCurrentPage({ next: res.data.next, total: res.data.total });
+				setCurrentPage({
+					next: res.data.next,
+					prev: res.data.prev,
+					total: res.data.total,
+				});
 				axios
 					.post(baseUrl + '/dogs/', res.data.resultIds, {
 						headers: {

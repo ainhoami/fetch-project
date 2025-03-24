@@ -8,20 +8,23 @@ interface IPagination {
 
 const Pagination = ({ setFilterOptions, currentPage }: IPagination) => {
 	const params = new URLSearchParams(currentPage.next?.split('?')[1]);
+	const paramsPrev = new URLSearchParams(currentPage.prev?.split('?')[1]);
+
 	const paramsfrom = Number(params.get('from'));
+	const paramsFromPrev = Number(paramsPrev.get('from'));
 	const [textForResults, setTextForResults] = useState<string>('');
 	const size = 25;
 	const noResults = currentPage.total === 0 ? '0 results found' : '';
 
 	useEffect(() => {
-		const startText = paramsfrom - size + 1;
+		const startText = paramsFromPrev + 1;
 		const endText =
 			paramsfrom > currentPage.total ? currentPage.total : paramsfrom;
 		setTextForResults(
 			noResults ||
 				`Showin ${startText} to ${endText} of ${currentPage.total} results`,
 		);
-	}, [params]);
+	}, [params, paramsPrev]);
 
 	const handlePagination = (event: React.MouseEvent<HTMLButtonElement>) => {
 		const action = event.currentTarget.innerHTML;
@@ -29,8 +32,8 @@ const Pagination = ({ setFilterOptions, currentPage }: IPagination) => {
 		let movePage: boolean = false;
 
 		if (action === 'Previous') {
-			from = paramsfrom > 25 ? paramsfrom - size * 2 : 0;
-			movePage = paramsfrom - size !== 0;
+			from = paramsPrev && paramsFromPrev;
+			movePage = paramsFromPrev !== 0;
 		} else {
 			from =
 				currentPage.total < paramsfrom ? paramsfrom - size : paramsfrom;
