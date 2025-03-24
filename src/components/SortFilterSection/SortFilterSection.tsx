@@ -29,7 +29,6 @@ const SortFilterSection = ({
 				sort: `${selectedOption}:${selectedDirection}`,
 			};
 		});
-		setFavoriteList([]);
 	}, [selectedDirection, selectedOption]);
 
 	return (
@@ -58,18 +57,21 @@ const SortFilterSection = ({
 					<Dropdown
 						dropdownValues={breeds}
 						setFilterOptions={setFilterOptions}
+						setFavoriteList={setFavoriteList}
 						name='Dogs'
 						filterKey='breeds'
 					/>
 					<Dropdown
 						dropdownValues={getAges(20)}
 						setFilterOptions={setFilterOptions}
+						setFavoriteList={setFavoriteList}
 						name='Min Age'
 						filterKey='ageMin'
 					/>
 					<Dropdown
 						dropdownValues={getAges(20)}
 						setFilterOptions={setFilterOptions}
+						setFavoriteList={setFavoriteList}
 						name='Max Age'
 						filterKey='ageMax'
 					/>
