@@ -11,12 +11,15 @@ const Pagination = ({ setFilterOptions, currentPage }: IPagination) => {
 	const paramsfrom = Number(params.get('from'));
 	const [textForResults, setTextForResults] = useState<string>('');
 	const size = 25;
+	const noResults = currentPage.total === 0 ? '0 results found' : '';
 
 	useEffect(() => {
+		const startText = paramsfrom - size + 1;
+		const endText =
+			paramsfrom > currentPage.total ? currentPage.total : paramsfrom;
 		setTextForResults(
-			`Showin ${paramsfrom - size + 1} to ${paramsfrom} of ${
-				currentPage.total
-			} results`,
+			noResults ||
+				`Showin ${startText} to ${endText} of ${currentPage.total} results`,
 		);
 	}, [params]);
 
@@ -46,7 +49,7 @@ const Pagination = ({ setFilterOptions, currentPage }: IPagination) => {
 	return (
 		<div className='flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 rounded-lg'>
 			<div className='flex flex-1 items-center justify-center md:justify-between'>
-				<div className='hidden sm:flex'>
+				<div>
 					<p className='text-sm text-gray-700'>{textForResults}</p>
 				</div>
 				<div className='flex flex-1 justify-end'>
