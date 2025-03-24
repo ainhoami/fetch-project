@@ -58,19 +58,17 @@ const SortFilterSection = ({
 						name='Dogs'
 						filterKey='breeds'
 					/>
-
-					<Dropdown
-						dropdownValues={getAges(20)}
-						setFilterOptions={setFilterOptions}
-						name='Max Age'
-						filterKey='ageMax'
-					/>
-
 					<Dropdown
 						dropdownValues={getAges(20)}
 						setFilterOptions={setFilterOptions}
 						name='Min Age'
 						filterKey='ageMin'
+					/>
+					<Dropdown
+						dropdownValues={getAges(20)}
+						setFilterOptions={setFilterOptions}
+						name='Max Age'
+						filterKey='ageMax'
 					/>
 				</div>
 			</div>

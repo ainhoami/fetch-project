@@ -4,6 +4,7 @@ import DogCard from '../components/DogCard/DogCard';
 import PageRibbon from '../components/PageRibbon/PageRibbon';
 import axios from 'axios';
 import SortFilterSection from '../components/SortFilterSection/SortFilterSection';
+import Pagination from '../components/Pagination/Pagination';
 
 export interface Dog {
 	id: string;
@@ -20,13 +21,24 @@ export interface IFilterOptions {
 	ageMax?: number;
 	breeds?: string;
 	sort?: string;
+	from?: string;
 }
+
+export interface ICurrentPage {
+	next: string;
+	total: number;
+}
+
 const Dogs = () => {
 	const [favoriteList, setFavoriteList] = useState<string[]>([]);
 	const [breeds, setBreeds] = useState<string[]>([]);
 	const [filterOptions, setFilterOptions] = useState<IFilterOptions>({});
 	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 	const [dogsOnDisplay, setDogsOnDisplay] = useState<Dog[]>([]);
+	const [currentPage, setCurrentPage] = useState<ICurrentPage>({
+		next: '',
+		total: 0,
+	});
 	const baseUrl = import.meta.env.VITE_API_URL;
 	const navigate = useNavigate();
 
@@ -73,6 +85,7 @@ const Dogs = () => {
 				withCredentials: true,
 			})
 			.then((res) => {
+				setCurrentPage({ next: res.data.next, total: res.data.total });
 				axios
 					.post(baseUrl + '/dogs/', res.data.resultIds, {
 						headers: {
@@ -97,10 +110,15 @@ const Dogs = () => {
 			<PageRibbon />
 			<SortFilterSection
 				breeds={breeds}
-				// setBreed={setFilteredBreed}
-				filterOptions={filterOptions}
 				setFilterOptions={setFilterOptions}
 			/>
+
+			<div className='px-5 bg-blue-200 dark:bg-gray-900'>
+				<Pagination
+					currentPage={currentPage}
+					setFilterOptions={setFilterOptions}
+				/>
+			</div>
 			<div className='flex flex-wrap pr-2 pt-2 md:pr-5 md:pt-5 bg-blue-200 dark:bg-gray-900'>
 				{dogsOnDisplay.map((card, i) => {
 					return (
@@ -116,7 +134,6 @@ const Dogs = () => {
 					);
 				})}
 			</div>
-			<div>Dogs</div>
 		</>
 	);
 };

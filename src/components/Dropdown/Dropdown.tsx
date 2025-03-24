@@ -25,11 +25,13 @@ const Dropdown = ({
 	const handleDropdownOption = (val: string) => {
 		setDropdownOpen(!dropdDownOpen);
 		setValue(val);
+		// Reset pagination if filter changes
 		if (setFilterOptions && filterKey) {
 			setFilterOptions((prev: IFilterOptions) => {
 				return {
 					...prev,
 					[filterKey]: val,
+					from: '0',
 				};
 			});
 		}
