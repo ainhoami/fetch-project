@@ -4,12 +4,14 @@ import RadioInput from '../RadioInput/RadioInput';
 import Dropdown from '../Dropdown/Dropdown';
 interface ISortFilterSectionProps {
 	breeds?: string[];
+	setFavoriteList: (val: string[]) => void;
 	setFilterOptions: (option: Record<string, any>) => void;
 }
 
 const SortFilterSection = ({
 	breeds,
 	setFilterOptions,
+	setFavoriteList,
 }: ISortFilterSectionProps) => {
 	const [selectedOption, setSelectdeOption] = useState<string>('breed');
 	const [selectedDirection, setSelectedDirection] = useState<string>('asc');
@@ -27,6 +29,7 @@ const SortFilterSection = ({
 				sort: `${selectedOption}:${selectedDirection}`,
 			};
 		});
+		setFavoriteList([]);
 	}, [selectedDirection, selectedOption]);
 
 	return (

@@ -17,7 +17,6 @@ export interface IDog {
 }
 
 export interface IFilterOptions {
-	zipCodes?: string;
 	ageMin?: number;
 	ageMax?: number;
 	breeds?: string;
@@ -136,7 +135,6 @@ const Dogs = () => {
 					navigate('/login', { replace: true });
 				}
 			});
-		setFavoriteList([]);
 	}, [filterOptions]);
 
 	return (
@@ -145,6 +143,7 @@ const Dogs = () => {
 			<SortFilterSection
 				breeds={breeds}
 				setFilterOptions={setFilterOptions}
+				setFavoriteList={setFavoriteList}
 			/>
 
 			<div className='px-5 bg-blue-200 dark:bg-gray-900'>
