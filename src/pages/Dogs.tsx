@@ -33,7 +33,6 @@ const Dogs = () => {
 	const [favoriteList, setFavoriteList] = useState<string[]>([]);
 	const [breeds, setBreeds] = useState<string[]>([]);
 	const [filterOptions, setFilterOptions] = useState<IFilterOptions>({});
-	const [isFavorite, setIsFavorite] = useState<boolean>(false);
 	const [dogsOnDisplay, setDogsOnDisplay] = useState<Dog[]>([]);
 	const [currentPage, setCurrentPage] = useState<ICurrentPage>({
 		next: '',
@@ -41,12 +40,6 @@ const Dogs = () => {
 	});
 	const baseUrl = import.meta.env.VITE_API_URL;
 	const navigate = useNavigate();
-
-	const handleSetFavorite = (val: string, isFavorite: boolean) => {
-		setFavoriteList((prev) =>
-			isFavorite ? [...prev, val] : prev.filter((id) => id !== val),
-		);
-	};
 
 	useEffect(() => {
 		axios
@@ -128,7 +121,9 @@ const Dogs = () => {
 						>
 							<DogCard
 								card={card}
-								setFavorite={handleSetFavorite}
+								favoriteList={favoriteList}
+								setFavoriteList={setFavoriteList}
+								// setFavorite={handleSetFavorite}
 							/>
 						</div>
 					);
