@@ -130,6 +130,7 @@ const Dogs = () => {
 					navigate('/login', { replace: true });
 				}
 			});
+		setFavoriteList([]);
 	}, [filterOptions]);
 
 	return (
