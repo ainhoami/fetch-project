@@ -1,20 +1,23 @@
-import { useState } from 'react';
-import testImage from '../../assets/login_dog.jpg';
 import Heart from 'react-heart';
-import { Dog } from '../../pages/Dogs';
+import { IDog } from '../../pages/Dogs';
 interface DogCardProps {
-	card: Dog;
-	setFavorite: (val: string, fav: boolean) => void;
+	card: IDog;
+	favoriteList?: string[];
+	setFavoriteList?: (val: string[]) => void;
 }
 const DogCard: React.FC<DogCardProps> = ({
 	card,
-	setFavorite,
+	favoriteList,
+	setFavoriteList,
 }: DogCardProps) => {
-	const [isHeartActive, setIsHeartActive] = useState<boolean>(false);
-
-	const handleFavorite = () => {
-		setFavorite(card.id, !isHeartActive);
-		setIsHeartActive(!isHeartActive);
+	const handleFavorite = (val: string) => {
+		if (setFavoriteList && favoriteList) {
+			if (favoriteList.includes(val)) {
+				setFavoriteList(favoriteList.filter((dogId) => dogId !== val));
+			} else {
+				setFavoriteList([...favoriteList, val]);
+			}
+		}
 	};
 
 	return (
@@ -36,17 +39,19 @@ const DogCard: React.FC<DogCardProps> = ({
 					Breed: {card.breed}
 				</p>
 				<p className='mb-4 font-normal text-gray-700 dark:text-gray-400'>
-					{card.zip_code}
+					ZipCode: {card.zip_code}
 				</p>
-				<span className=''>
-					<Heart
-						style={{ width: '2rem' }}
-						inactiveColor='white'
-						isActive={isHeartActive}
-						activeColor='#D22B2B'
-						onClick={handleFavorite}
-					/>
-				</span>
+				{favoriteList && (
+					<span className=''>
+						<Heart
+							style={{ width: '2rem' }}
+							inactiveColor='pink'
+							isActive={favoriteList.includes(card.id)}
+							activeColor='#D22B2B'
+							onClick={() => handleFavorite(card.id)}
+						/>
+					</span>
+				)}
 			</div>
 		</div>
 	);
