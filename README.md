@@ -1,50 +1,62 @@
-# React + TypeScript + Vite
+# Dog Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Dog Portal! Here you can find dogs available for adoption based on your preferences. To enter the portal, you need to log in by providing your name and email.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Filter Dogs:**
+  You can filter available dogs by:
 
-## Expanding the ESLint configuration
+  - Minimum age
+  - Maximum age
+  - Breed
+    <br/>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Sort Results:**
+  The displayed dogs can be sorted in ascending or descending order, making it easier for you to find your perfect match.
+  <br/>
+- **Favorites:** Each dog has a heart icon that allows you to mark them as a favorite.
+  <br/>
+- **Find a Match:**
+  - You can select multiple dogs as favorites.
+  - Once you have selected favorites, a button will appear to find a match.
+  - When a match is found, a screen will display the selected dog.
+    <br/>
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+You can clone this repository and run the project locally.
+
+### Installation
+
+1. Clone this repository:
+
+   ```sh
+   git clone git@github.com:ainhoami/fetch-project.git
+   cd fetch-project
+   ```
+
+2. Install dependencies:
+
+   ```sh
+   npm install
+   ```
+
+3. Create an `.env` file in the root of the project and set the base API URL:
+   ```sh
+   VITE_API_URL=<fectch-api-url>
+   ```
+
+### Running the Project
+
+To start the development server, run:
+
+```sh
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Then, open your browser and visit:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```
+http://localhost:3000
 ```
