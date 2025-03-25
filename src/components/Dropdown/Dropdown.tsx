@@ -3,7 +3,7 @@ import { IFilterOptions } from '../../pages/Dogs';
 
 interface IDropdown {
 	dropdownValues?: string[];
-	setFavoriteList?: (val: string) => void;
+	setFavoriteList: (val: string[]) => void;
 	setFilterOptions: (option: Record<string, any>) => void;
 	name?: string;
 	filterKey?: string;

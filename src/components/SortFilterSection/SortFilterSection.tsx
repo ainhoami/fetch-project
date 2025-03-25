@@ -35,9 +35,9 @@ const SortFilterSection = ({
 		<>
 			<div
 				className='flex flex-wrap
- pr-2 pt-2 md:pr-5 md:pt-5 bg-blue-200 dark:bg-blue-100'
+ pr-2 pt-2 md:pr-5 md:pt-5 bg-blue-200 dark:bg-gray-900'
 			>
-				<div className='pl-5 pr-4 md:pr-0 pb-5 basis-1/1 md:basis-1/5'>
+				<div className='pl-5 pr-4 md:pr-0 pb-5 basis-1/1 md:basis-1/5 min-h-[128px]'>
 					<RadioInput
 						options={{
 							breed: 'Breed',
@@ -47,7 +47,7 @@ const SortFilterSection = ({
 						selectedVal={[selectedOption, setSelectdeOption]}
 					/>
 				</div>
-				<div className='pl-5 pr-4 md:pr-0 pb-5 basis-1/1 md:basis-1/5'>
+				<div className='pl-5 pr-4 md:pr-0 pb-5 basis-1/1 md:basis-1/5 min-h-[128px]'>
 					<RadioInput
 						selectedVal={[selectedDirection, setSelectedDirection]}
 						options={{ asc: 'Asc', desc: 'Desc' }}

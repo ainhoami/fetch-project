@@ -14,17 +14,18 @@ const Pagination = ({ setFilterOptions, currentPage }: IPagination) => {
 	const paramsFromPrev = Number(paramsPrev.get('from'));
 	const [textForResults, setTextForResults] = useState<string>('');
 	const size = 25;
-	const noResults = currentPage.total === 0 ? '0 results found' : '';
 
 	useEffect(() => {
-		const startText = paramsFromPrev + 1;
+		const noResults = currentPage.total === 0 ? '0 results found' : '';
+
+		const startText = currentPage.prev ? paramsFromPrev + size + 1 : 1;
 		const endText =
 			paramsfrom > currentPage.total ? currentPage.total : paramsfrom;
 		setTextForResults(
 			noResults ||
-				`Showin ${startText} to ${endText} of ${currentPage.total} results`,
+				`Showing ${startText} to ${endText} of ${currentPage.total} results`,
 		);
-	}, [params, paramsPrev]);
+	}, [paramsfrom, paramsFromPrev, currentPage.total]);
 
 	const handlePagination = (event: React.MouseEvent<HTMLButtonElement>) => {
 		const action = event.currentTarget.innerHTML;
@@ -32,11 +33,10 @@ const Pagination = ({ setFilterOptions, currentPage }: IPagination) => {
 		let movePage: boolean = false;
 
 		if (action === 'Previous') {
-			from = paramsPrev && paramsFromPrev;
-			movePage = paramsFromPrev !== 0;
+			from = currentPage.prev ? paramsFromPrev : 0;
+			movePage = currentPage.prev ? true : false;
 		} else {
-			from =
-				currentPage.total < paramsfrom ? paramsfrom - size : paramsfrom;
+			from = currentPage.total < paramsfrom ? paramsfrom - size : paramsfrom;
 			movePage = paramsfrom === from;
 		}
 
