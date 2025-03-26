@@ -6,6 +6,7 @@ import axios from 'axios';
 import SortFilterSection from '../components/SortFilterSection/SortFilterSection';
 import Pagination from '../components/Pagination/Pagination';
 import ResultsModal from '../components/ResultsModal/ResultsModal';
+import './Dogs.scss';
 
 export interface IDog {
 	id: string;
@@ -147,17 +148,12 @@ const Dogs = () => {
 			/>
 
 			<div className='px-5 bg-blue-200 dark:bg-gray-900'>
-				<Pagination
-					currentPage={currentPage}
-					setFilterOptions={setFilterOptions}
-				/>
+				<Pagination currentPage={currentPage} setFilterOptions={setFilterOptions} />
 			</div>
 			<div className='flex flex-wrap pr-2 pt-2 md:pr-5 md:pt-5 bg-blue-200 dark:bg-gray-900'>
-				{modalOpen && (
-					<ResultsModal dog={dogMatch} setModalOpen={toggleModal} />
-				)}
+				{modalOpen && <ResultsModal dog={dogMatch} setModalOpen={toggleModal} />}
 				<button
-					className={`${
+					className={`Dogs__matchButton ${
 						!favoriteList.length || modalOpen ? 'hidden' : ''
 					} fixed right-6 p-4 bg-purple-700 text-white rounded-sm shadow-lg hover:bg-blue-400 focus:outline-none`}
 					onClick={handleFindMatch}
@@ -166,10 +162,7 @@ const Dogs = () => {
 				</button>
 				{dogsOnDisplay.map((card, i) => {
 					return (
-						<div
-							key={i}
-							className='pl-5 pr-4 md:pr-0 pb-5 basis-1/1 md:basis-1/4'
-						>
+						<div key={i} className='pl-5 pr-4 md:pr-0 pb-5 basis-1/1 md:basis-1/4'>
 							<DogCard
 								card={card}
 								favoriteList={favoriteList}

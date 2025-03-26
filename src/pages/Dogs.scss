@@ -1,0 +1,7 @@
+.Dogs {
+	&__matchButton {
+		@media screen and (max-width: 550px) {
+			top: 20rem;
+		}
+	}
+}
