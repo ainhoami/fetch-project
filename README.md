@@ -1,6 +1,7 @@
 # Dog Portal
 
 Welcome to the Dog Portal! Here you can find dogs available for adoption based on your preferences. To enter the portal, you need to log in by providing your name and email.
+Live Site: https://fetch-project-3dkkc5vt6-ainhoamis-projects.vercel.app/
 
 ## Features
 
